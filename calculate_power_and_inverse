@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+int mod=1e9+7;
+using namespace std;
+int power(int a,int b)
+{
+	int res=1;
+	while(b)
+	{
+		if(b&1)
+		{
+			b=b-1;
+			res=res*a;
+		}
+		else
+		{
+			b=b/2;
+			a=a*a;
+		}
+	}
+	return res;
+}
+int main()
+{
+	int a,p;
+	cin>>a>>p;
+	
+	// to calculate the power of a number
+	int z=power(a,p);
+	
+	// to calculate the inverse of a number
+	int inv=power(a,mod-2);
+	
+	cout<<z<<"\n";
+	cout<<inv;
+}
