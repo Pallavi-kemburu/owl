@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+vector<int>s(1000001,1);
+void sieve()
+{
+    s[0]=0;
+    s[1]=0;
+    int n=1000000+1;
+    for(int i=2;i*i<=n;i++)
+    {
+        if(s[i]==1)
+        {
+            for(int j=i*i;j<=n;j+=i)
+            {
+                s[j]=0;
+            }
+        }
+    }
+}
+int main() {
+	ll t;
+	cin>>t;
+	sieve();
+	while(t--)
+	{
+	    ll l,r;
+	    cin>>l>>r;
+	    int n=r-l;
+		vector<int>a(n,1);
+		vector<int>p;
+		int c=0;
+		for(int i=2;i*i<=(r);i++)
+		{
+			if(s[i]==1)
+			{
+				p.push_back(i);
+			}
+		}
+	/*	for(int i=0;i<p.size();i++)
+		{
+			cout<<p[i]<<" ";
+		}  */
+		//cout<<p.size()<<" ";
+		for(int i=0;i<p.size();i++)
+		{
+		//	cout<<"**"<<" ";
+			int z=l/p[i];
+			if(z*p[i] < l)
+			{
+				z=(z*p[i])+p[i];
+			}
+			else
+			{
+				z=z*p[i];
+			}
+			for(int j=z;j<=r;j=j+p[i])
+			{
+				a[j-l]=0;
+			}
+		}
+	/*	for(int i=0;i<a.size();i++)
+		{
+			cout<<a[i]<<" ";
+		} */
+		for(int i=0;i<a.size();i++)
+		{
+			if(a[i]==1) c++;
+		}
+		cout<<c<<"\n";
+	}
+}
